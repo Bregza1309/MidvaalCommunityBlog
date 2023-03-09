@@ -1,0 +1,89 @@
+﻿@model Post; 
+@inject IBlogRepository repo
+@inject UserManager<User> userManager;
+
+@{
+    ViewData["Title"] = "Home Page";
+    
+    List<string> Categories = await repo.GetCategories();
+    string? Category = (string?)ViewData["Tag"];
+    IQueryable<Post> Posts = repo.GetPosts(Category);
+
+}
+<div class="row">
+    <div class="col-3 gap-2" id="tags">
+        <div>
+            @foreach (string category in Categories)
+            {
+                if (category == Category)
+                {
+                        <button class="btn btn-light">#@category</button>
+                }
+                else
+                {
+                        <a asp-action="Index" asp-controller="Home" asp-route-category="@category" class="btn btn-outline-light">#@category</a>
+                }
+
+            }
+    </div>
+    </div>
+    
+    <div class="col-9 text-white gap-2 text-center" id="timeline">
+        <div id="posts">
+            <div class="card text-white">
+                <div class="card-body d-flex flex-row">
+                    <img src="~/images/profiles/@((await userManager.FindByNameAsync(User.Identity?.Name)).Avatar)" class="rounded-circle me-3" height="50px" width="50px"/>
+                </div>
+                <div class="float-right">
+                    <h5>Make a Post......! </h5>
+                    <div asp-validation-summary="All" class="bg-dark"></div>
+                    <form asp-action="Index" asp-controller="Home" method="post">
+                    <input type="hidden" asp-for="UserName" value="@User.Identity?.Name"/>
+                    <div class="form-outline gap-3">
+
+                        <input asp-for="Title" class="bg-dark text-white" placeholder="Title"/>
+                        <input asp-for="Category" placeholder="#tag" class="bg-dark text-white" />
+                    </div>
+                    <div class="form-floating">
+                        <textarea cols="50" rows="5" asp-for="Description" class="bg-dark text-white" placeholder="Ignite The Community........."></textarea>
+                        <ion-icon name="image-outline"></ion-icon>
+                    </div>
+                    <button type="submit" class="btn btn-success"><ion-icon name="radio-outline" class="float-right"></ion-icon></button>
+
+                </form>
+                </div>
+            </div>
+            <h3 class="display-4 text-center">@(Category != null ? Category : "What's happening ......")</h3>
+                @foreach (Post p in Posts)
+                {
+
+                <div class="card text-white">
+                    
+                    <div class="card-body  flex-row">
+
+                            <img src="~/images/profiles/@((await userManager.FindByNameAsync(p.UserName)).Avatar)" class="rounded-circle me-3" height="50px" width="50px"/>
+
+                        <div>
+                            <h4 class="card-title font-weight-bold mb-2 text-center" >@p.Title</h4>
+                                <a style="color:#707070">@($"@{p.UserName.ToLower()}")</a>
+                            <p  style="color:#707070"><ion-icon name="time-outline" ></ion-icon> : @p.PostedOn.ToString("g")</p>
+
+                        </div>
+
+                    </div>
+                    <div class="card-body">
+                            <p>@p.Description</p>    
+
+                    </div>
+
+                        
+                </div>
+                    <br>
+
+                }
+            </div>  
+    </div>
+</div>
+
+
+

@@ -1,0 +1,64 @@
+﻿@inject SignInManager<User> Manager;
+@inject UserManager<User> userManager;
+@{
+    User currentUser = await userManager.FindByNameAsync(User.Identity?.Name);
+    string Avatar = currentUser.Avatar; 
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MidvaalCommunityBlog</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/ionicons/collection/components/icon/icon.min.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Style.css" asp-append-version="true" />
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-sm sticky-top navbar-dark text-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MidvaalCommunityBlog</a>
+            <div class="text-end text-white">
+                @if (Manager.IsSignedIn(User))
+                {
+                        
+                    <img class="avatar rounded-circle" src="~/images/profiles/@Avatar" height="50px" width="50px"/>
+                }
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container row">
+        <div  class="col pb-3">
+            @RenderBody()
+        </div>
+        @if (Manager.IsSignedIn(User))
+        {
+                <div class="col-2 gap-1 text-white" id="personal">
+                    <div>
+                        <ion-icon name="person-outline" id="per"></ion-icon>
+                        <a asp-action="Edit" asp-controller="Account" class="text-white navbar-brand">Account Settings</a>
+                    </div>
+                    <div>
+                        <ion-icon name="log-out-outline" id="per"></ion-icon>
+                        <a class="text-white navbar-brand" asp-action="Logout" asp-controller="Account">Logout</a>
+                    </div>
+                </div>
+        }
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - MidvaalCommunityBlog - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/ionicons/ionicons/ionicons.js"></script>
+    <script src="~/lib/ionicons/ionicons/index.esm.js" type="module"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "ionicons@6.1.3",
+      "destination": "wwwroot/lib/ionicons/"
+    }
+  ]
+}

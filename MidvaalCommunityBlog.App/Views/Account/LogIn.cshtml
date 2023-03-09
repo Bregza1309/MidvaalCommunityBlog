@@ -1,0 +1,29 @@
+﻿@model UserLogin
+@{
+    ViewData["Title"] = "LogIn";
+    Layout = "_AccountLayout";
+}
+<div>
+    <div class="login-dark text-white">
+        <form method="post" asp-action="Login" asp-controller="Account" >
+            <h2 class="sr-only">Welcome Back</h2>
+            <div class="illustration"><ion-icon name="log-in-outline"></ion-icon></div>
+            <div class="alert-danger" asp-validation-summary="All"></div>
+            <input type="hidden" asp-for="ReturnUrl"/>
+            <div class="form-floating">
+                <input class="form-control bg-dark" asp-for="Email" placeholder="Email">
+                <label asp-for="Email">Email Address</label>
+            </div>
+            <div class="form-floating">
+                <input class="form-control bg-dark" asp-for="Password" placeholder="Password" type="password">
+                <label asp-for="Password">Password</label>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-secondary btn-block" id="log" type="submit">
+                    <ion-icon name="arrow-forward-outline"></ion-icon>
+                </button>
+            </div>
+            <a asp-action="Register" asp-controller="Account" class="forgot">Click here to Register </a>
+        </form>
+    </div>
+</div>

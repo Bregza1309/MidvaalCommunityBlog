@@ -1,0 +1,49 @@
+﻿@model RegisterUser;
+@{
+    Layout = "_AccountLayout";
+}
+<div class="login-dark">
+        <form method="post" asp-action="Register" asp-controller="Account" >
+            <h2 class="sr-only">Join Our Community</h2>
+            <div class="illustration"><ion-icon name="person-add-outline"></ion-icon></div>
+            <div class="alert-danger bg-dark" asp-validation-summary="All"></div>
+            <div class="form-floating">
+                <input class="form-control bg-dark" asp-for="UserName">
+                <label asp-for="UserName">Username</label>
+            </div>
+            <div class="form-floating">
+                <input class="form-control bg-dark" asp-for="FirstName">
+                <label asp-for="FirstName">Firstname</label>
+            </div>
+            <div class="form-floating">
+                <input class="form-control bg-dark" asp-for="LastName" >
+                <label asp-for="LastName">Lastname</label>
+            </div>
+            <div class="form-floating">
+                <input class="form-control bg-dark" asp-for="EmailAddress">
+                <label asp-for="EmailAddress">Email Address</label>
+            </div>
+            <div class="form-floating">
+                <input class="form-control bg-dark" asp-for="Profession">
+                <label asp-for="EmailAddress">Profession</label>
+            </div>
+            <div class="form-floating">
+                <input class="form-control bg-dark" asp-for="Password" type="password">
+                <label asp-for="Password"></label>
+            </div>
+            <div class="form-floating">
+                <input class="form-control bg-dark" asp-for="ConfirmPassword"  type="password">
+                <label asp-for="ConfirmPassword">Confirm</label>
+            </div>
+            <div class="form-floating">
+                <select asp-for="Location" class="form-control bg-dark" >
+                    <option value="">Please Select Your Area</option>
+                    <option value="Daleside/Randvaal">Daleside/Randvaal</option>
+                    <option value="Meyerton">Meyerton</option>
+                    <option value="Henley On Klip">Henley On Klip</option>
+                    <option value="Lakeside/OrangeFarm">Lakeside/OrangeFarm</option>
+                </select>
+            </div>
+            <div class="form-group"><button class="btn btn-secondary  btn-block" id="log" type="submit"><ion-icon name="lock-open-outline"></ion-icon></button></div><a asp-action="Login" asp-controller="Account" class="forgot">Already Registered? Click here to Login</a>
+        </form>
+    </div>

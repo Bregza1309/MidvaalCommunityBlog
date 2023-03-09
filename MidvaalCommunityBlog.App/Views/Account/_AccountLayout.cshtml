@@ -1,0 +1,26 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/Style.css"/>
+    <link rel="stylesheet" href="~/lib/ionicons/collection/components/icon/icon.css">
+    <style>
+        body{
+            background: rgb(25,29,34);
+            background: radial-gradient(circle, rgba(25,29,34,1) 38%, rgba(53,53,74,1) 80%, rgba(115,119,122,1) 100%);
+        }
+    </style>
+</head>
+<body >
+    <div >
+        @RenderBody()
+    </div>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/ionicons/ionicons/ionicons.js"></script>
+    <script src="~/lib/ionicons/ionicons/index.esm.js" type="module"></script>
+</body>
+</html>
